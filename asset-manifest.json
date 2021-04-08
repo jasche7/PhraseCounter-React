@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/PhraseCounter-React/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/PhraseCounter-React/static/js/main.fa4c281a.chunk.js",
+    "main.js.map": "/PhraseCounter-React/static/js/main.fa4c281a.chunk.js.map",
+    "runtime-main.js": "/PhraseCounter-React/static/js/runtime-main.b197b16a.js",
+    "runtime-main.js.map": "/PhraseCounter-React/static/js/runtime-main.b197b16a.js.map",
+    "static/js/2.c434bf15.chunk.js": "/PhraseCounter-React/static/js/2.c434bf15.chunk.js",
+    "static/js/2.c434bf15.chunk.js.map": "/PhraseCounter-React/static/js/2.c434bf15.chunk.js.map",
+    "static/js/3.11ee4270.chunk.js": "/PhraseCounter-React/static/js/3.11ee4270.chunk.js",
+    "static/js/3.11ee4270.chunk.js.map": "/PhraseCounter-React/static/js/3.11ee4270.chunk.js.map",
+    "index.html": "/PhraseCounter-React/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/PhraseCounter-React/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.c434bf15.chunk.js.LICENSE.txt": "/PhraseCounter-React/static/js/2.c434bf15.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b197b16a.js",
+    "static/js/2.c434bf15.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.fa4c281a.chunk.js"
+  ]
+}
