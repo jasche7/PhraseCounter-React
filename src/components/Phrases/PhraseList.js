@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Phrase from "./Phrase";
 
 const PhraseList = (props) => {
-  const url = "http://localhost:8080/phrase";
+  const url = "https://phrase-counter.herokuapp.com/phrase";
   const [res, setRes] = useState([]);
 
   const makeRequest = (data) => {
