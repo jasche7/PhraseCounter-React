@@ -4,8 +4,10 @@ import Phrase from "./Phrase";
 const PhraseList = (props) => {
   const url = "https://phrase-counter.herokuapp.com/phrase";
   const [res, setRes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const makeRequest = (data) => {
+    setLoading(true);
     fetch(url, {
       method: "POST",
       mode: "cors",
@@ -17,8 +19,23 @@ const PhraseList = (props) => {
       .then((response) => response.json())
       .then((result) => {
         setRes(Object.entries(result));
+        setLoading(false);
         console.log(result);
       });
+  };
+
+  const makePhrases = () => {
+    if (loading) {
+      return <>Loading...</>;
+    } else {
+      return res.map((phrasecount) => (
+        <Phrase
+          key={phrasecount[0]}
+          phrase={phrasecount[0]}
+          count={phrasecount[1]}
+        />
+      ));
+    }
   };
 
   useEffect(() => {
@@ -32,17 +49,7 @@ const PhraseList = (props) => {
     }
   }, [props.active, props.phraseCount]);
 
-  return (
-    <>
-      {res.map((phrasecount) => (
-        <Phrase
-          key={phrasecount[0]}
-          phrase={phrasecount[0]}
-          count={phrasecount[1]}
-        />
-      ))}
-    </>
-  );
+  return <>{makePhrases()}</>;
 };
 
 export default PhraseList;
