@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Textbox = (props) => {
   const [text, setText] = useState();
@@ -33,26 +35,31 @@ const Textbox = (props) => {
           onChange={(e) => setText(e.target.value)}
         />
       </Form.Group>
+      <Row style={{ display: "flex" }}>
+        <Col>
+          <Form.Group controlId="formText">
+            <Form.Label>Min Occurrences:</Form.Label>
+            <Form.Control
+              type="number"
+              value={occurrences}
+              onChange={(e) => setOccurrences(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
 
-      <Form.Group controlId="formText">
-        <Form.Label>Min Occurrences:</Form.Label>
-        <Form.Control
-          type="number"
-          value={occurrences}
-          onChange={(e) => setOccurrences(e.target.value)}
-        />
-      </Form.Group>
+        <Col>
+          <Form.Group controlId="formText">
+            <Form.Label>Max Phrase Length:</Form.Label>
+            <Form.Control
+              type="number"
+              value={phrase}
+              onChange={(e) => setPhrase(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
 
-      <Form.Group controlId="formText">
-        <Form.Label>Max Phrase Length:</Form.Label>
-        <Form.Control
-          type="number"
-          value={phrase}
-          onChange={(e) => setPhrase(e.target.value)}
-        />
-      </Form.Group>
-
-      {submitButton()}
+        <Col className="my-auto">{submitButton()}</Col>
+      </Row>
     </Form>
   );
 };
