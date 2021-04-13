@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Textbox = (props) => {
   const [text, setText] = useState();
   const [occurrences, setOccurrences] = useState(0);
   const [phrase, setPhrase] = useState(0);
+  const loading = props.loading;
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -11,33 +14,46 @@ const Textbox = (props) => {
     props.clickFunction();
   };
 
-  return (
-    <form onSubmit={onSubmit}>
-      <label>
-        Text:
-        <textarea value={text} onChange={(e) => setText(e.target.value)} />
-      </label>
+  const submitButton = () => {
+    if (loading) {
+      return <Button disabled>Submit</Button>;
+    } else {
+      return <Button type="submit">Submit</Button>;
+    }
+  };
 
-      <label>
-        Min Occurrences:
-        <input
+  return (
+    <Form onSubmit={onSubmit}>
+      <Form.Group controlId="formText">
+        <Form.Label>Text</Form.Label>
+        <Form.Control
+          required
+          as="textarea"
+          placeholder="Enter text"
+          onChange={(e) => setText(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formText">
+        <Form.Label>Min Occurrences:</Form.Label>
+        <Form.Control
           type="number"
           value={occurrences}
           onChange={(e) => setOccurrences(e.target.value)}
         />
-      </label>
+      </Form.Group>
 
-      <label>
-        Max Phrase Length:
-        <input
+      <Form.Group controlId="formText">
+        <Form.Label>Max Phrase Length:</Form.Label>
+        <Form.Control
           type="number"
           value={phrase}
           onChange={(e) => setPhrase(e.target.value)}
         />
-      </label>
+      </Form.Group>
 
-      <button type="submit" />
-    </form>
+      {submitButton()}
+    </Form>
   );
 };
 
