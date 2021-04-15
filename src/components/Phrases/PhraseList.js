@@ -17,7 +17,7 @@ const PhraseList = (props) => {
           <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>
-          Loading... (The Heroku server may be starting up.)
+          Loading... (The server may be starting up.)
         </>
       );
     } else {

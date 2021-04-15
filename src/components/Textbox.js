@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 
 const Textbox = (props) => {
   const [text, setText] = useState();
-  const [occurrences, setOccurrences] = useState(0);
+  const [occurrences, setOccurrences] = useState(2);
   const [phrase, setPhrase] = useState(0);
   const loading = props.loading;
 
@@ -32,8 +32,10 @@ const Textbox = (props) => {
           required
           as="textarea"
           placeholder="Enter text"
+          maxlength="5000"
           onChange={(e) => setText(e.target.value)}
         />
+        <Form.Text className="text-muted">5000 characters max</Form.Text>
       </Form.Group>
       <Row style={{ display: "flex" }}>
         <Col>
@@ -56,6 +58,7 @@ const Textbox = (props) => {
               onChange={(e) => setPhrase(e.target.value)}
             />
           </Form.Group>
+          <Form.Text className="text-muted">0 for no max</Form.Text>
         </Col>
 
         <Col className="my-auto">{submitButton()}</Col>

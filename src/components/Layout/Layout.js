@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Textbox from "./Textbox";
-import Display from "./Display";
-import PhraseList from "./Phrases/PhraseList";
+import Textbox from "../Textbox";
+import Display from "../Display";
+import PhraseList from "../Phrases/PhraseList";
+import Header from "../Header";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,7 +15,12 @@ const Layout = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <Container>
+    <Container fluid className="main-container">
+      <Row>
+        <Col>
+          <Header />
+        </Col>
+      </Row>
       <Row>
         <Col>
           <Textbox
@@ -24,15 +30,19 @@ const Layout = () => {
           />
         </Col>
         <Col>
-          <Display text={phraseCount[0]} />
+          <Display className="display-box" text={phraseCount[0]} />
         </Col>
       </Row>
-      <PhraseList
-        active={active}
-        loading={loading}
-        setLoading={setLoading}
-        phraseCount={phraseCount}
-      />
+      <Row>
+        <Col>
+          <PhraseList
+            active={active}
+            loading={loading}
+            setLoading={setLoading}
+            phraseCount={phraseCount}
+          />
+        </Col>
+      </Row>
     </Container>
   );
 };
