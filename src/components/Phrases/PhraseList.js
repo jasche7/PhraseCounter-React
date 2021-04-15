@@ -8,7 +8,7 @@ const PhraseList = (props) => {
   const [res, setRes] = useState([]);
   const loading = props.loading;
   const setLoading = props.setLoading;
-  const phraseCount = props.phraseCount;
+  const requestBody = props.requestBody;
   const active = props.active;
 
   const makePhrases = () => {
@@ -21,11 +21,11 @@ const PhraseList = (props) => {
         </>
       );
     } else {
-      return res.map((phrasecount) => (
+      return res.map((requestBody) => (
         <Phrase
-          key={phrasecount[0]}
-          phrase={phrasecount[0]}
-          count={phrasecount[1]}
+          key={requestBody[0]}
+          phrase={requestBody[0]}
+          count={requestBody[1]}
         />
       ));
     }
@@ -70,13 +70,15 @@ const PhraseList = (props) => {
 
     if (active) {
       let phraseMaker = {
-        text: phraseCount[0],
-        minOccurrences: phraseCount[1],
-        maxPhraseLength: phraseCount[2],
+        text: requestBody[0],
+        minOccurrences: requestBody[1],
+        maxPhraseLength: requestBody[2],
+        isCaseSensitive: requestBody[3],
+        isIgnoringPunctuation: requestBody[4],
       };
       makeRequest(phraseMaker);
     }
-  }, [active, init, phraseCount, setLoading]);
+  }, [active, init, requestBody, setLoading]);
 
   return <>{makePhrases()}</>;
 };

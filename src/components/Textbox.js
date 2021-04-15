@@ -8,11 +8,19 @@ const Textbox = (props) => {
   const [text, setText] = useState();
   const [occurrences, setOccurrences] = useState(2);
   const [phrase, setPhrase] = useState(0);
+  const [isCaseSensitive, setIsCaseSensitive] = useState(false);
+  const [isIgnoringPunctuation, setIsIgnoringPunctuation] = useState(false);
   const loading = props.loading;
 
   const onSubmit = (event) => {
     event.preventDefault();
-    props.setPhraseCount([text, occurrences, phrase]);
+    props.setRequestBody([
+      text,
+      occurrences,
+      phrase,
+      isCaseSensitive,
+      isIgnoringPunctuation,
+    ]);
     props.clickFunction();
   };
 
@@ -61,6 +69,28 @@ const Textbox = (props) => {
           <Form.Text className="text-muted">0 for no max</Form.Text>
         </Col>
 
+        <Col>
+          <Row>
+            <Form.Group controlId="formCaseSensitive">
+              <Form.Check
+                type="checkbox"
+                label="Case Sensitive"
+                checked={isCaseSensitive}
+                onChange={(e) => setIsCaseSensitive(e.target.checked)}
+              />
+            </Form.Group>
+          </Row>
+          <Row>
+            <Form.Group controlId="formIgnoringPunctuation">
+              <Form.Check
+                type="checkbox"
+                label="Ignore Punctuation"
+                checked={isIgnoringPunctuation}
+                onChange={(e) => setIsIgnoringPunctuation(e.target.checked)}
+              />
+            </Form.Group>
+          </Row>
+        </Col>
         <Col className="my-auto">{submitButton()}</Col>
       </Row>
     </Form>

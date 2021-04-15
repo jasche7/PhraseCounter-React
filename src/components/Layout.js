@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Layout = () => {
-  const [phraseCount, setPhraseCount] = useState([]);
+  const [requestBody, setRequestBody] = useState([]);
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -25,12 +25,12 @@ const Layout = () => {
         <Col>
           <Textbox
             clickFunction={() => setActive(true)}
-            setPhraseCount={setPhraseCount}
+            setPhraseCount={setRequestBody}
             loading={loading}
           />
         </Col>
         <Col>
-          <Display className="display-box" text={phraseCount[0]} />
+          <Display className="display-box" text={requestBody[0]} />
         </Col>
       </Row>
       <Row>
@@ -39,7 +39,7 @@ const Layout = () => {
             active={active}
             loading={loading}
             setLoading={setLoading}
-            phraseCount={phraseCount}
+            requestBody={requestBody}
           />
         </Col>
       </Row>
