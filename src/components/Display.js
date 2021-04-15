@@ -6,7 +6,13 @@ const Display = (props) => {
     <Form>
       <Form.Group controlId="display">
         <Form.Label>Display Text</Form.Label>
-        <Form.Control required as="textarea" value={props.text} disabled />
+        <Form.Control
+          required
+          as="textarea"
+          value={props.text}
+          rows={8}
+          disabled
+        />
       </Form.Group>
     </Form>
   );
