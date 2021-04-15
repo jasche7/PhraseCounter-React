@@ -3,7 +3,8 @@ import Phrase from "./Phrase";
 import Spinner from "react-bootstrap/Spinner";
 
 const PhraseList = (props) => {
-  const url = "https://phrase-counter.herokuapp.com/phrase";
+  const url = "https://phrase-counter.herokuapp.com";
+  const [init, setInit] = useState(false);
   const [res, setRes] = useState([]);
   const loading = props.loading;
   const setLoading = props.setLoading;
@@ -17,7 +18,6 @@ const PhraseList = (props) => {
           <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>
-          Loading... (The server may be starting up.)
         </>
       );
     } else {
@@ -32,9 +32,17 @@ const PhraseList = (props) => {
   };
 
   useEffect(() => {
+    const wakeUp = () => {
+      setLoading(true);
+      fetch(url).catch(() => {
+        setLoading(false);
+        console.log("Sent wake-up request to server");
+      });
+    };
+
     const makeRequest = (data) => {
       setLoading(true);
-      fetch(url, {
+      fetch(url + "/phrase", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -47,8 +55,18 @@ const PhraseList = (props) => {
           setRes(Object.entries(result));
           setLoading(false);
           console.log(result);
+        })
+        .catch((err) => {
+          console.log(err.code);
+          console.log(err.message);
+          console.log(err.stack);
         });
     };
+
+    if (!init) {
+      wakeUp();
+      setInit(true);
+    }
 
     if (active) {
       let phraseMaker = {
@@ -58,7 +76,7 @@ const PhraseList = (props) => {
       };
       makeRequest(phraseMaker);
     }
-  }, [active, phraseCount, setLoading]);
+  }, [active, init, phraseCount, setLoading]);
 
   return <>{makePhrases()}</>;
 };
