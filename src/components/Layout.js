@@ -25,7 +25,7 @@ const Layout = () => {
         <Col>
           <Textbox
             clickFunction={() => setActive(true)}
-            setPhraseCount={setRequestBody}
+            setRequestBody={setRequestBody}
             loading={loading}
           />
         </Col>
