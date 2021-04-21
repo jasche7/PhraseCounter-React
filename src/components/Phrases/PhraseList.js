@@ -6,6 +6,7 @@ const PhraseList = (props) => {
   const url = "https://phrase-counter.herokuapp.com";
   const [init, setInit] = useState(false);
   const [res, setRes] = useState([]);
+  const [errorState, setErrorState] = useState(false);
   const loading = props.loading;
   const setLoading = props.setLoading;
   const requestBody = props.requestBody;
@@ -20,7 +21,17 @@ const PhraseList = (props) => {
           </Spinner>
         </>
       );
+    } else if (errorState) {
+      switch (errorState) {
+        case 1:
+          return <p>Request failed. The server may be down.</p>;
+        case 2:
+          return <p>Request failed. Your request may be too long.</p>;
+        default:
+          return;
+      }
     } else {
+      console.log(res);
       return res.map((requestBody) => (
         <Phrase
           key={requestBody[0]}
@@ -52,15 +63,19 @@ const PhraseList = (props) => {
       })
         .then((response) => response.json())
         .then((result) => {
-          setRes(Object.entries(result));
-          setLoading(false);
-          console.log(result);
+          if (result.status === 500) {
+            setErrorState(2);
+          } else {
+            setRes(Object.entries(result));
+            console.log(result.status);
+            setErrorState(false);
+          }
         })
         .catch((err) => {
-          console.log(err.code);
           console.log(err.message);
-          console.log(err.stack);
-        });
+          setErrorState(1);
+        })
+        .finally(setLoading(false));
     };
 
     if (!init) {
@@ -73,8 +88,8 @@ const PhraseList = (props) => {
         text: requestBody[0],
         minOccurrences: requestBody[1],
         maxPhraseLength: requestBody[2],
-        isCaseSensitive: requestBody[3],
-        isIgnoringPunctuation: requestBody[4],
+        caseSensitive: requestBody[3],
+        ignoringPunctuation: requestBody[4],
       };
       makeRequest(phraseMaker);
     }
