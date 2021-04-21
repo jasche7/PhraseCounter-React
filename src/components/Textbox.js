@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const Textbox = (props) => {
   const [text, setText] = useState();
   const [occurrences, setOccurrences] = useState(2);
-  const [phrase, setPhrase] = useState(0);
-  const [isCaseSensitive, setIsCaseSensitive] = useState(false);
-  const [isIgnoringPunctuation, setIsIgnoringPunctuation] = useState(false);
+  const [phrase, setPhrase] = useState(5);
+  const [caseSensitive, setCaseSensitive] = useState(false);
+  const [ignoringPunctuation, setIgnoringPunctuation] = useState(false);
   const loading = props.loading;
 
   const onSubmit = (event) => {
@@ -18,8 +20,8 @@ const Textbox = (props) => {
       text,
       occurrences,
       phrase,
-      isCaseSensitive,
-      isIgnoringPunctuation,
+      caseSensitive,
+      ignoringPunctuation,
     ]);
     props.clickFunction();
   };
@@ -40,10 +42,10 @@ const Textbox = (props) => {
           required
           as="textarea"
           placeholder="Enter text"
-          maxlength="5000"
+          maxLength="3000"
           onChange={(e) => setText(e.target.value)}
         />
-        <Form.Text className="text-muted">5000 characters max</Form.Text>
+        <Form.Text className="text-muted">3000 characters max</Form.Text>
       </Form.Group>
       <Row style={{ display: "flex" }}>
         <Col>
@@ -59,7 +61,11 @@ const Textbox = (props) => {
 
         <Col>
           <Form.Group controlId="formText">
-            <Form.Label>Max Phrase Length:</Form.Label>
+            <OverlayTrigger
+              overlay={<Tooltip>Keep low for faster, stabler results!</Tooltip>}
+            >
+              <Form.Label>Max Phrase Length*:</Form.Label>
+            </OverlayTrigger>
             <Form.Control
               type="number"
               value={phrase}
@@ -75,8 +81,8 @@ const Textbox = (props) => {
               <Form.Check
                 type="checkbox"
                 label="Case Sensitive"
-                checked={isCaseSensitive}
-                onChange={(e) => setIsCaseSensitive(e.target.checked)}
+                defaultChecked={caseSensitive}
+                onChange={(e) => setCaseSensitive(e.target.checked)}
               />
             </Form.Group>
           </Row>
@@ -85,8 +91,8 @@ const Textbox = (props) => {
               <Form.Check
                 type="checkbox"
                 label="Ignore Punctuation"
-                checked={isIgnoringPunctuation}
-                onChange={(e) => setIsIgnoringPunctuation(e.target.checked)}
+                defaultChecked={ignoringPunctuation}
+                onChange={(e) => setIgnoringPunctuation(e.target.checked)}
               />
             </Form.Group>
           </Row>
