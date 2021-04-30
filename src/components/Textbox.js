@@ -64,7 +64,7 @@ const Textbox = (props) => {
             <OverlayTrigger
               overlay={<Tooltip>Keep low for faster, stabler results!</Tooltip>}
             >
-              <Form.Label>Max Phrase Length*:</Form.Label>
+              <Form.Label>Max Phrase Length:</Form.Label>
             </OverlayTrigger>
             <Form.Control
               type="number"
