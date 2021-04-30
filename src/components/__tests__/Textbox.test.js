@@ -7,21 +7,21 @@ describe(`The Textbox component`, () => {
     const { queryByLabelText } = render(<Textbox />);
 
     const text = queryByLabelText(/Text/);
-    expect(text).toBeTruthy();
+    expect(text).toBeInTheDocument();
     expect(text.textContent).toBe("");
 
     const min = queryByLabelText(/Min Occurrences:/);
-    expect(min).toBeTruthy();
+    expect(min).toBeInTheDocument();
 
     const max = queryByLabelText(/Max Phrase Length:/);
-    expect(max).toBeTruthy();
+    expect(max).toBeInTheDocument();
 
     const caseSensitive = queryByLabelText(/Case Sensitive/);
-    expect(caseSensitive).toBeTruthy();
+    expect(caseSensitive).toBeInTheDocument();
     expect(caseSensitive.checked).toEqual(false);
 
     const ignoresPunctuation = queryByLabelText(/Ignore Punctuation/);
-    expect(ignoresPunctuation).toBeTruthy();
+    expect(ignoresPunctuation).toBeInTheDocument();
     expect(ignoresPunctuation.checked).toEqual(false);
   });
 
