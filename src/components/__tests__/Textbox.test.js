@@ -1,5 +1,5 @@
 import Textbox from "../Textbox";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe(`The Textbox component`, () => {
@@ -25,14 +25,16 @@ describe(`The Textbox component`, () => {
     expect(ignoresPunctuation.checked).toEqual(false);
   });
 
-  it(`can submit by clicking the Submit button`, async () => {
+  it(`can submit by clicking the Submit button`, () => {
     const handleClick = jest.fn();
     const setRequestBody = jest.fn();
 
-    render(
+    const { getByText } = render(
       <Textbox clickFunction={handleClick} setRequestBody={setRequestBody} />
     );
-    userEvent.click(screen.getByText(/Submit/i));
+
+    const submit = getByText(/Submit/);
+    userEvent.click(submit);
     expect(handleClick).toHaveBeenCalledTimes(1);
     expect(setRequestBody).toHaveBeenCalledTimes(1);
   });
