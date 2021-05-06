@@ -28,10 +28,13 @@ const PhraseList = (props) => {
         case 2:
           return <p>Request failed. Your request may be too long.</p>;
         default:
-          return;
+          return <p>Request failed.</p>;
       }
     } else {
-      console.log(res);
+      // mutes blank log from running tests
+      if (res && res.length) {
+        console.log(res);
+      }
       return res.map((requestBody) => (
         <Phrase
           key={requestBody[0]}
