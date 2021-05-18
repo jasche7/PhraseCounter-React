@@ -1,9 +1,7 @@
 const url = "https://phrase-counter.herokuapp.com";
 
-export const wakeUp = (setLoading) => {
-  setLoading(true);
+export const wakeUp = () => {
   fetch(url).catch(() => {
-    setLoading(false);
     console.log("Sent wake-up request to server");
   });
 };
