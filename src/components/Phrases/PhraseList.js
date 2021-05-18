@@ -46,7 +46,7 @@ const PhraseList = (props) => {
 
   useEffect(() => {
     if (!APIInit) {
-      phraseService.wakeUp(setAPILoading);
+      phraseService.wakeUp();
       setAPIInit(true);
     }
 
@@ -83,7 +83,7 @@ const PhraseList = (props) => {
     }
   }, [active, APIInit, requestBody, setAPILoading]);
 
-  return <>{makePhrases()}</>;
+  return <>{makePhrases()}</>; //returns either loading spinner, error, or current phrases
 };
 
 export default PhraseList;
