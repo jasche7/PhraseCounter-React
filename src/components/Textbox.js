@@ -43,6 +43,7 @@ const Textbox = (props) => {
           as="textarea"
           placeholder="Enter text"
           maxLength="3000"
+          value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <Form.Text className="text-muted">3000 characters max</Form.Text>
