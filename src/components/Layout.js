@@ -9,6 +9,9 @@ import Col from "react-bootstrap/Col";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+/**
+ * Layout of PhraseCount page. Parent component for passing props.
+ */
 const Layout = () => {
   const [requestBody, setRequestBody] = useState([]);
   const [active, setActive] = useState(false);
