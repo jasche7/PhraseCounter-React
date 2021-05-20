@@ -14,6 +14,9 @@ export const phraseRequest = async (data) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+  }).then((response) => {
+    console.log(response);
+    response.json();
   });
   return result;
 };

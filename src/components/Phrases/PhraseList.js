@@ -54,18 +54,16 @@ const PhraseList = (props) => {
       setAPILoading(true);
       phraseService
         .phraseRequest(data)
-        .then((response) => response.json())
         .then((result) => {
           if (result.status === 500) {
             setErrorState(errorStates.BAD_REQUEST);
           } else {
             setPhrases(Object.entries(result));
-            console.log(result.status);
             setErrorState(false);
           }
         })
         .catch((err) => {
-          console.log(err.message);
+          console.error(err.message);
           setErrorState(errorStates.SERVER_DOWN);
         })
         .finally(setAPILoading(false));
