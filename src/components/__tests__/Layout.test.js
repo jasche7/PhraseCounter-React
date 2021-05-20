@@ -22,4 +22,21 @@ describe(`The Layout component`, () => {
       expect(display.textContent).toBe(testText);
     });
   });
+
+  it(`creates Phrase components upon receiving a response from PhraseService`, async () => {
+    phraseService.phraseRequest.mockResolvedValue({ hello: 3 });
+
+    const testText = "Hello World!";
+    const { getByLabelText, getByText } = render(<Layout />);
+    const text = getByLabelText("Text");
+    const submit = getByText("Submit");
+
+    userEvent.type(text, testText);
+    userEvent.click(submit);
+
+    await waitFor(() => {
+      const phrase = getByText("hello: 3");
+      expect(phrase).toBeInTheDocument();
+    });
+  });
 });
