@@ -6,14 +6,26 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+/**
+ * Controlled form for creating PhraseCount request.
+ * @param {*} props contains the following parameters:
+ * clickFunction - sets active flag to true, enabling PhraseList to make API calls
+ * setRequestBody - setter function for storing PhraseCount request body
+ * loading - disables submit button when waiting for PhraseList API call to resolve
+ */
 const Textbox = (props) => {
   const [text, setText] = useState();
-  const [occurrences, setOccurrences] = useState(2);
-  const [phrase, setPhrase] = useState(5);
+  const [occurrences, setOccurrences] = useState(2); //default value 2 to omit single words
+  const [phrase, setPhrase] = useState(5); //default value 5 for performance
   const [caseSensitive, setCaseSensitive] = useState(false);
   const [ignoringPunctuation, setIgnoringPunctuation] = useState(false);
   const loading = props.loading;
 
+  /**
+   * Disables form submit default behavior of refreshing page. Sets the requestBody for PhraseCount and
+   * sets the active flag to allow PhraseList API calls.
+   * @param {*} event form submit event
+   */
   const onSubmit = (event) => {
     event.preventDefault();
     props.setRequestBody([
@@ -26,6 +38,9 @@ const Textbox = (props) => {
     props.clickFunction();
   };
 
+  /**
+   * Submit button for form; disables when loading from PhraseList API call.
+   */
   const submitButton = () => {
     if (loading) {
       return <Button disabled>Submit</Button>;

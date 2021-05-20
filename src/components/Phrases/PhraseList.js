@@ -3,13 +3,25 @@ import Phrase from "./Phrase";
 import Spinner from "react-bootstrap/Spinner";
 import * as phraseService from "./PhraseService.js";
 
+/**
+ * Error states related to PhraseService call.
+ */
 const errorStates = {
   SERVER_DOWN: "serverdown",
   BAD_REQUEST: "badrequest",
 };
 
+/**
+ * PhraseList component makes call to PhraseService and generates Phrase components based
+ * on return value.
+ * @param {*} props contains the following parameters:
+ * active - once Textbox form has been submitted once, set to true so that PhraseService can be called
+ * loading - while waiting for a response from PhraseService, set to true so that Textbox form submit is disabled
+ * setLoading - useState setter for loading
+ * requestBody - parameters for PhraseService request, set by Textbox
+ */
 const PhraseList = (props) => {
-  const [APIInit, setAPIInit] = useState(false);
+  const [APIInit, setAPIInit] = useState(false); //for initial API call (e.g. waking Heroku)
   const [phrases, setPhrases] = useState([]);
   const [errorState, setErrorState] = useState(false);
   const APILoading = props.loading;
@@ -17,6 +29,9 @@ const PhraseList = (props) => {
   const requestBody = props.requestBody;
   const active = props.active; //prevents sending API requests until form has been submitted once
 
+  /**
+   * Returns loading spinner if loading, error message if errorState, or else generated Phrase components.
+   */
   const makePhrases = () => {
     if (APILoading) {
       return (
@@ -44,6 +59,11 @@ const PhraseList = (props) => {
     }
   };
 
+  /**
+   * Calls API wakeUp function if not already called this session. If active and requestBody changes
+   * from new Textbox form submission, will make a new request to phraseService. setPhrases will generate
+   * Phrase components from the API response.
+   */
   useEffect(() => {
     if (!APIInit) {
       phraseService.wakeUp();
@@ -55,9 +75,9 @@ const PhraseList = (props) => {
       phraseService
         .phraseRequest(data)
         .then((result) => {
-          if (result.status === 500) {
+          if (result && result.status === 500) {
             setErrorState(errorStates.BAD_REQUEST);
-          } else {
+          } else if (result) {
             setPhrases(Object.entries(result));
             setErrorState(false);
           }
