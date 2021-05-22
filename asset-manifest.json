@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/PhraseCounter-React/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/PhraseCounter-React/static/js/main.06454843.chunk.js",
-    "main.js.map": "/PhraseCounter-React/static/js/main.06454843.chunk.js.map",
+    "main.js": "/PhraseCounter-React/static/js/main.3c6853fa.chunk.js",
+    "main.js.map": "/PhraseCounter-React/static/js/main.3c6853fa.chunk.js.map",
     "runtime-main.js": "/PhraseCounter-React/static/js/runtime-main.0b7872ed.js",
     "runtime-main.js.map": "/PhraseCounter-React/static/js/runtime-main.0b7872ed.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/PhraseCounter-React/static/css/2.4c97ca4f.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.4c97ca4f.chunk.css",
     "static/js/2.40cde9f4.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.06454843.chunk.js"
+    "static/js/main.3c6853fa.chunk.js"
   ]
 }
