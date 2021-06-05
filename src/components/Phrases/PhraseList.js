@@ -86,7 +86,9 @@ const PhraseList = (props) => {
           console.error(err.message);
           setErrorState(errorStates.SERVER_DOWN);
         })
-        .finally(setAPILoading(false));
+        .finally(() => {
+          setAPILoading(false);
+        });
     };
 
     if (active) {
